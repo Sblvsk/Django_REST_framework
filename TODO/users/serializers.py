@@ -5,5 +5,5 @@ from .models import User
 class UserModelSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email')
-        #exclude = ('') исключить
+        fields = ('__all__')
+        #exclude = ('age', 'bio') #исключить
