@@ -14,14 +14,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get("http://127.0.0.1:8013/api/users/").then(response => {
+    axios.get("http://127.0.0.1:8013/apiusers/").then(response => {
         this.setState(
         {
           "users":response.data
         }
     )
 
-    })
+    }).catch(error =>  console.log(error))
 
 //    const users = [
 //      {
