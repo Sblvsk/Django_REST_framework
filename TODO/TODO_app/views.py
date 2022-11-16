@@ -2,8 +2,10 @@ from django.shortcuts import render
 
 from rest_framework.viewsets import ModelViewSet
 
+
 from .models import User, Project, Todo
 from .serializers import ProjectSerializer, TodoSerializer
+
 
 
 class ProjectModelViewSet(ModelViewSet):
