@@ -11,8 +11,8 @@ class ProjectFilterSet(filters.FilterSet):
 
 #
 # class TodoFilterSet(filters.FilterSet):
-#     name = filters.CharFilter(lookup_expr='contains')
+#     name = filters.DateFromToRangeFilter()
 #
 #     class Meta:
 #         model = Todo
-#         fields = ['project']
+#         fields = ['create']
