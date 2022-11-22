@@ -3,12 +3,12 @@ from .models import User, Project, Todo
 
 
 
-class ProjectSerializer(HyperlinkedModelSerializer):
+class ProjectSerializer(ModelSerializer):
     class Meta:
         model = Project
-        fields = '__all__'
+        fields = ('__all__')
 
 class TodoSerializer(ModelSerializer):
     class Meta:
         model = Todo
-        fields = '__all__'
+        fields = ('__all__')
