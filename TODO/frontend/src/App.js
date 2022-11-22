@@ -5,6 +5,7 @@ import UserList from './components/User.js';
 import ProjectList from './components/Project.js';
 import TodoList from "./components/Todo.js";
 import NotFound404 from "./components/NotFound404";
+import TodoProjects from "./components/TodoProject";
 import axios from 'axios';
 import {BrowserRouter, Route, Routes, Link, Navigate} from "react-router-dom";
 
@@ -61,7 +62,14 @@ class App extends React.Component {
                   </li>
               </nav>
               <Routes>
-                 <Route exact path ='/' element={<UserList users={this.state.users} />} />
+                 <Route exact path='/' element={<Navigate to='/users'/>} />
+                 <Route path='/users'>
+                     <Route index element={<UserList users={this.state.users} />}  />
+                     <Route path=':projectId' element={<TodoProjects todo={this.state.todo}/>}/>
+                 </Route>
+
+
+
                  <Route exact path ='/projects' element={<ProjectList items={this.state.projects} />} />
                  <Route exact path ='/todos' element={<TodoList items={this.state.todos} />} />
 
