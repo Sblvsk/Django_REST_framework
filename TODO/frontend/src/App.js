@@ -5,6 +5,7 @@ import UserList from './components/User.js';
 import ProjectList from './components/Project.js';
 import TodoList from "./components/Todo.js";
 import axios from 'axios';
+import {BrowserRouter, Route, Routes, Link, Navigate} from "react-router-dom";
 
 
 class App extends React.Component {
@@ -45,9 +46,24 @@ class App extends React.Component {
   render() {
     return (
       <div>
-         <UserList users={this.state.users} />
-         <ProjectList items={this.state.projects} />
-         <TodoList items={this.state.todos} />
+          <BrowserRouter>
+              <nav>
+                  <li>
+                      <Link to={'/'}>Users</Link>
+                  </li>
+                  <li>
+                      <Link to={'/projects'}>Projects</Link>
+                  </li>
+                  <li>
+                      <Link to={'/todos'}>todo</Link>
+                  </li>
+              </nav>
+              <Routes>
+                 <Route exact path ='/' element={<UserList users={this.state.users} />} />
+                 <Route exact path ='/projects' element={<ProjectList items={this.state.projects} />} />
+                 <Route exact path ='/todos' element={<TodoList items={this.state.todos} />} />
+              </Routes>
+          </BrowserRouter>
       </div>
     )
   }
