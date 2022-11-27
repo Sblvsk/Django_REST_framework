@@ -20,9 +20,8 @@ class App extends React.Component {
       "todos": [],
     }
   }
-
-  componentDidMount() {
-    axios.get("http://127.0.0.1:8013/api/users/").then(response => {
+  load_data(){
+     axios.get("http://127.0.0.1:8013/api/users/").then(response => {
         this.setState(
         {
           "users":response.data.results
@@ -43,6 +42,9 @@ class App extends React.Component {
           "todos":response.data.results
         })
     }).catch(error =>  console.log(error))
+  }
+  componentDidMount() {
+    this.load_data()
 
   }
 
