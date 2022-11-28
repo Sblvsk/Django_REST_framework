@@ -5,7 +5,7 @@ from rest_framework.response import Response
 
 from rest_framework.viewsets import ModelViewSet
 
-from .filters import ProjectFilterSet#, TodoFilterSet
+from .filters import ProjectFilterSet  #, TodoFilterSet
 from .models import User, Project, Todo
 from .serializers import ProjectSerializer, TodoSerializer
 
