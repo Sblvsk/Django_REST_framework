@@ -25,13 +25,9 @@ class App extends React.Component {
     logout() {
         this.set_token('')
         this.setState({
-            "users": []
-        })
-        this.setState({
-            "projects": []
-        })
-        this.setState({
-            "todos": []
+            "users": [],
+            "projects": [],
+            "todos": [],
         })
     }
 
