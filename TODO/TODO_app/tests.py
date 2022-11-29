@@ -30,8 +30,9 @@ class TestProjectViewSet(TestCase):
     #     factory = APIRequestFactory()
     #     request = factory.post('/api/projects/', {'name': "Questions", 'href_repository': '-', 'users': 'user1'},
     #                            format='json')
-    #     admin = User.objects.create_superuser('admin', 'admin@admin.com',
-    #                                           'admin123456')
+    #     # admin = User.objects.create_superuser('admin', 'admin@admin.com',
+    #     #                                       'admin123456')
+    #     admin = User.objects.create_user('admin', is_staff=True, is_superuser=True)
     #     force_authenticate(request, admin)
     #     view = ProjectModelViewSet.as_view({'post': 'create'})
     #     response = view(request)
