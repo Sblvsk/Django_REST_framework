@@ -7,7 +7,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from .filters import ProjectFilterSet  #, TodoFilterSet
 from .models import User, Project, Todo
-from .serializers import ProjectSerializer, TodoSerializer, ProjectSerializerBase
+from .serializers import ProjectSerializer, TodoSerializer
 
 
 class ProjectLimitOffsetPagination(LimitOffsetPagination):
@@ -23,10 +23,7 @@ class ProjectModelViewSet(ModelViewSet):
     filterset_class = ProjectFilterSet
     pagination_class = ProjectLimitOffsetPagination
 
-    def get_serializer_class(self):
-        if self.request.version == 'v2':
-            return ProjectSerializerBase
-        return ProjectSerializer
+
 
 
 

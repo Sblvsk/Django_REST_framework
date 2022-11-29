@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'TODO_app',
     'django_filters',
     'rest_framework.authtoken',
+    'projectAPIapp',
 ]
 
 MIDDLEWARE = [
@@ -158,6 +159,6 @@ REST_FRAMEWORK = {
     ],
 
     'DEFAULT_VERSIONING_CLASS':
-        'rest_framework.versioning.QueryParameterVersioning',
+        'rest_framework.versioning.URLPathVersioning'
 
 }

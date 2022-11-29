@@ -8,10 +8,7 @@ class ProjectSerializer(ModelSerializer):
         fields = ('__all__')
 
 
-class ProjectSerializerBase(ModelSerializer):
-    class Meta:
-        model = Project
-        fields = ('name',)
+
 
 
 class TodoSerializer(ModelSerializer):
@@ -20,7 +17,4 @@ class TodoSerializer(ModelSerializer):
         fields = ('__all__')
 
 
-class TodoSerializerBase(ModelSerializer):
-    class Meta:
-        model = Todo
-        fields = ('note',)
+
