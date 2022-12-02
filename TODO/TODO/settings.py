@@ -14,6 +14,7 @@ from pathlib import Path
 
 import rest_framework.permissions
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -49,7 +50,9 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'projectAPIapp',
     'drf_yasg',
+    "graphene_django",
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -162,4 +165,8 @@ REST_FRAMEWORK = {
     'DEFAULT_VERSIONING_CLASS':
         'rest_framework.versioning.URLPathVersioning'
 
+}
+
+GRAPHENE = {
+    'SCHEMA': "TODO.schema.schema"
 }

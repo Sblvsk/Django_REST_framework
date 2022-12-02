@@ -26,6 +26,8 @@ from users.views import UserCustomViewSet
 from TODO_app.views import ProjectModelViewSet, TodoModelViewSet
 from rest_framework.authtoken import views
 
+from graphene_django.views import GraphQLView
+
 schema_view = get_schema_view(
     openapi.Info(
         title='Todo',
@@ -51,5 +53,6 @@ urlpatterns = [
     path('api/<str:version>/projects/', ProjectListAPIView.as_view()),
     # path('swagger<str:format>/', schema_view.without_ui()),
     path('swagger/', schema_view.with_ui('swagger')),
+    path("graphql/", GraphQLView.as_view(graphiql=True)),
 
 ]
