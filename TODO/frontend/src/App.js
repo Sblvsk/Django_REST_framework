@@ -10,6 +10,8 @@ import LoginForm from "./components/Auth";
 import axios from 'axios';
 import {BrowserRouter, Route, Routes, Link, Navigate} from "react-router-dom";
 import Cookies from "universal-cookie";
+import ProjectForm from "./components/ProjectForm";
+import TodoForm from "./components/TodoForm";
 
 class App extends React.Component {
     constructor(props) {
@@ -39,6 +41,32 @@ class App extends React.Component {
                 this.setState({
                     todos: this.state.todos.filter((item) => item.id !== id)
                 })
+            }).catch(error => console.log(error))
+    }
+
+    createProject(name, user) {
+        const headers = this.get_headers()
+        const data = {name: name, user: user}
+        axios.post(`http://127.0.0.1:8013/api/projects/`, data, {headers})
+            .then(response => {
+                let new_project = response.data
+                const user = this.state.users.filter((item) => item.id ===
+                    new_project.user)[0]
+                new_project.user = user
+                this.setState({projects: [...this.state.projects, new_project]})
+            }).catch(error => console.log(error))
+    }
+
+    createTodo(name, project) {
+        const headers = this.get_headers()
+        const data = {name: name, project: project}
+        axios.post(`http://127.0.0.1:8013/api/todo/`, data, {headers})
+            .then(response => {
+                let new_todo = response.data
+                const project = this.state.projects.filter((item) => item.id ===
+                    new_todo.project)[0]
+                new_todo.project = project
+                this.setState({todos: [...this.state.todos, new_todo]})
             }).catch(error => console.log(error))
     }
 
@@ -151,10 +179,17 @@ class App extends React.Component {
                         {/*<Route exact path='/projects' element={<ProjectList items={this.state.projects}/>}/>*/}
                         <Route exact path='/projects' element={
                             <ProjectList items={this.state.projects} deleteProject={(id) => this.deleteProject(id)}/>}/>
-
                         <Route exact path='/todos' element={
                             <TodoList items={this.state.todos} deleteTodo={(id) => this.deleteTodo(id)}/>}/>
 
+
+                        <Route exact path='/projects/create'
+                               element={<ProjectForm users={this.state.users} createProject={(name, user) =>
+                                   this.createProject(name, user)}/>}/>
+
+                        <Route exact path='/todo/create'
+                               element={<TodoForm projects={this.state.projects} createTodo={(name, project) =>
+                                   this.createTodo(name, project)}/>}/>
 
 
                         <Route path='*' element={<NotFound404/>}/>

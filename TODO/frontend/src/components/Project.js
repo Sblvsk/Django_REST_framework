@@ -24,19 +24,22 @@ const ProjectItem = ({item, deleteProject}) => {
 const ProjectList = ({items, deleteProject}) => {
 
     return (
-        <table>
-            <th>
-                Name
-            </th>
-            <th>
-                href
-            </th>
-            <th>
-                Users
-            </th>
-            <th></th>
-            {items.map((item_) => <ProjectItem item={item_} deleteProject={deleteProject}/>)}
-        </table>
+        <div>
+            <table>
+                <th>
+                    Name
+                </th>
+                <th>
+                    href
+                </th>
+                <th>
+                    Users
+                </th>
+                <th></th>
+                {items.map((item_) => <ProjectItem item={item_} deleteProject={deleteProject}/>)}
+            </table>
+            <Link to='/projects/create'>Create</Link>
+        </div>
     )
 }
 
