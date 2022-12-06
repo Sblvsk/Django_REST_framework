@@ -22,6 +22,27 @@ class App extends React.Component {
         }
     }
 
+    deleteProject(id) {
+        const headers = this.get_headers()
+        axios.delete(`http://127.0.0.1:8013/api/projects/${id}`, {headers})
+            .then(response => {
+                this.setState({
+                    projects: this.state.projects.filter((item) => item.id !== id)
+                })
+            }).catch(error => console.log(error))
+    }
+
+    deleteTodo(id) {
+        const headers = this.get_headers()
+        axios.delete(`http://127.0.0.1:8013/api/todo/${id}`, {headers})
+            .then(response => {
+                this.setState({
+                    todos: this.state.todos.filter((item) => item.id !== id)
+                })
+            }).catch(error => console.log(error))
+    }
+
+
     logout() {
         this.set_token('')
         this.setState({
@@ -38,13 +59,13 @@ class App extends React.Component {
     set_token(token) {
         const cookies = new Cookies()
         cookies.set('token', token)
-        this.setState({'token': token}, () =>this.load_data())
+        this.setState({'token': token}, () => this.load_data())
     }
 
     get_token_storage() {
         const cookies = new Cookies()
         const token = cookies.get('token')
-        this.setState({'token':token}, () => this.load_data())
+        this.setState({'token': token}, () => this.load_data())
     }
 
     get_token(username, password) {
@@ -58,8 +79,8 @@ class App extends React.Component {
         let headers = {
             'Content-Type': 'application/json'
         }
-        if (this.is_auth()){
-            headers['Authorization'] = 'Token '+this.state.token
+        if (this.is_auth()) {
+            headers['Authorization'] = 'Token ' + this.state.token
         }
         return headers
     }
@@ -112,7 +133,8 @@ class App extends React.Component {
                             <Link to={'/todos'}>todo</Link>
                         </li>
                         <li>
-                            {this.is_auth() ? <button onClick={() => this.logout()}>Logout</button> : <Link to='/login'>Login</Link>}
+                            {this.is_auth() ? <button onClick={() => this.logout()}>Logout</button> :
+                                <Link to='/login'>Login</Link>}
                         </li>
                     </nav>
                     <Routes>
@@ -124,8 +146,16 @@ class App extends React.Component {
 
                         <Route exact path='/login' element={<LoginForm
                             get_token={(username, password) => this.get_token(username, password)}/>}/>
-                        <Route exact path='/projects' element={<ProjectList items={this.state.projects}/>}/>
-                        <Route exact path='/todos' element={<TodoList items={this.state.todos}/>}/>
+
+                        {/*<Route exact path='/todos' element={<TodoList items={this.state.todos}/>}/>*/}
+                        {/*<Route exact path='/projects' element={<ProjectList items={this.state.projects}/>}/>*/}
+                        <Route exact path='/projects' element={
+                            <ProjectList items={this.state.projects} deleteProject={(id) => this.deleteProject(id)}/>}/>
+
+                        <Route exact path='/todos' element={
+                            <TodoList items={this.state.todos} deleteTodo={(id) => this.deleteTodo(id)}/>}/>
+
+
 
                         <Route path='*' element={<NotFound404/>}/>
                     </Routes>
